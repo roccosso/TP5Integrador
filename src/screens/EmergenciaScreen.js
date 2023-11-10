@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, Linking, Alert, Platform, ImageBackground } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Linking, Alert, Platform, ImageBackground, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react';
 import { Accelerometer} from 'expo-sensors';
 import { Vibration } from 'react-native';

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import DataService from '../services/DataService'
 import ModalMensaje from '../components/ModalMensaje'
 import MessageConstants from '../constants/MessageConstants'
+import Boton from '../components/Boton'
+import Menu from '../components/Menu'
 
 let dataService = new DataService();
 

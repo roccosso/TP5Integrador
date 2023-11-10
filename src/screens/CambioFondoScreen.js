@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, SafeAreaView, Button, Image, ImageBackground, TouchableOpacity } from 'react-native'
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import Button from "../components/Button";
 import Constants from "expo-constants";
 import * as ImagePicker from "expo-image-picker";
-import appStyles from '../styles/appStyles.js';
+import Boton from "../components/Boton.js";
 
 export default function CameraScreen({ navigation }) {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -53,8 +52,8 @@ export default function CameraScreen({ navigation }) {
   }
 
   return (
-    <View style={appStyles.container}>
-      <View style={appStyles.topControls}>
+    <View >
+      <View >
         <Button
           onPress={() =>
             setFlash(
@@ -68,8 +67,7 @@ export default function CameraScreen({ navigation }) {
         />
       </View>
       {!image ? (
-        <Camera
-          style={appStyles.camera}
+        <Camera          
           type={type}
           ref={cameraRef}
           flashMode={flash}
@@ -82,8 +80,7 @@ export default function CameraScreen({ navigation }) {
             }}
           >
             <Button
-              title=""
-              icon="retweet"
+              title="Presionar"              
               onPress={() => {
                 setType(
                   type === Camera.Constants.Type.back
@@ -95,9 +92,9 @@ export default function CameraScreen({ navigation }) {
           </View>
         </Camera>
       ) : (
-        <Image source={{ uri: image }} style={appStyles.camera} />
+        <Image source={{ uri: image }} />
       )}
-      <View style={appStyles.controls}>
+      <View >
         {image ? (
           <View
             style={{
@@ -109,12 +106,11 @@ export default function CameraScreen({ navigation }) {
             <Button
               title="Volver a sacar"
               onPress={() => setImage(null)}
-              icon="retweet"
             />
-            <Button title="Guardar" onPress={savePicture} icon="check" />
+            <Button title="Guardar" onPress={savePicture} />
           </View>
         ) : (
-          <Button title="Sacar una foto" onPress={takePicture} icon="camera" />
+          <Button title="Sacar una foto" onPress={takePicture} />
         )}
       </View>
     </View>
