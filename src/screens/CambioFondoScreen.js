@@ -4,7 +4,6 @@ import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import Constants from "expo-constants";
 import * as ImagePicker from "expo-image-picker";
-import Boton from "../components/Boton.js";
 
 export default function CameraScreen({ navigation }) {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);

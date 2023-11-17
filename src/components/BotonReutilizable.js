@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 
-export default function Boton({titulo, onPress, style}) {
+export default function BotonReutilizable({titulo, onPress, style}) {
   
   const handleOnPress = () => {
     onPress();

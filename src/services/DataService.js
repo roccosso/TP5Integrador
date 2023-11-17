@@ -1,14 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"; 
 
-//npm i @react-native-async-storage/async-storage 
-//Definicionesdeconstantes. 
+
 const TELEFONO_KEY='telefono';
 const VIDEO_KEY='video';
 const MUSICA_KEY='musica';
 const BACKGROUND_KEY='background';
 
 export default class DataService{ 
-    //Elimina las credenciales almacenadas al cerrar sesión 
     eliminarDatos = async() => { 
         try{
             await AsyncStorage.removeItem(TELEFONO_KEY); 
@@ -20,7 +18,6 @@ export default class DataService{
     }; 
 
     almacenarDatos = async(telefono, video, musica) => { 
-        //Almacena las credenciales en el asyncStorage
         try {    
             await AsyncStorage.setItem(TELEFONO_KEY, telefono);  
             await AsyncStorage.setItem(VIDEO_KEY, video); 
@@ -33,7 +30,6 @@ export default class DataService{
     }; 
 
     guardarBackground = async(background) => { 
-        //Almacena las credenciales en el asyncStorage
         try {    
             await AsyncStorage.setItem(BACKGROUND_KEY, background);  
             return true;

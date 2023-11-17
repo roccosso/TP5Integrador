@@ -18,6 +18,7 @@ export default function EmergenciaScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [success, setSuccess] = useState(false);
   const [mensajeModal, setMensajeModal] = useState('');
+  const [telefono, setTelefono] = useState();
   const [image, setImage] = useState(null);
 
   const _slow = () => Accelerometer.setUpdateInterval(1000);
@@ -28,8 +29,34 @@ export default function EmergenciaScreen() {
     Linking.openURL(`tel:${phoneNumber}`)
   }
 
+  const chequearNumero = async () => {
+    if ((await dataService.obtenerDatos()).telefono) {
+      datos = dataService.obtenerDatos();
+      llamarNumero(datos.telefono);
+    } else {
+      setMensajeModal(MessageConstants.MSG_TELEFONO_UNDEFINED);
+      setModalVisible(true);
+    }
+    Vibration.vibrate();
+  };
+
   const _subscribe = () => {
-    setSubscription(Accelerometer.addListener(setData));
+    let auxiliarX;
+    setSubscription(Accelerometer.addListener(async (accelerometerData) => {
+      auxiliarX = x;
+      if (accelerometerData.x < auxiliarX) {
+        if ((auxiliarX - accelerometerData.x) > 0.5) {
+          chequearNumbero();
+        }
+      } else {
+        if ((accelerometerData.x - auxiliarX) > 0.5) {
+          if ((auxiliarX - accelerometerData.x) > 0.5) {
+            chequearNumbero();
+          }
+        }
+      }
+      setData(accelerometerData);
+    }));
   };
 
   const _unsubscribe = () => {
@@ -37,8 +64,25 @@ export default function EmergenciaScreen() {
     setSubscription(null);
   };
 
+  let loadBackground = async () => {
+    if (JSON.parse(await dataService.obtenerBackground())) {
+      let backgroundImage = JSON.parse(await dataService.obtenerBackground());
+      setImage(backgroundImage.uri);
+    }
+  }
+
+  let loadTelefono = async () => {
+    let datos = await dataService.obtenerDatos();
+    if(datos.telefono){
+      setTelefono(datos.telefono)
+    }    
+  }
+
   useEffect(() => {
+    loadBackground();
+    loadTelefono();
     _subscribe();
+    _slow();
     return () => _unsubscribe();
   }, []);
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import DataService from '../services/DataService'
 import ModalMensaje from '../components/ModalMensaje'
 import MessageConstants from '../constants/MessageConstants'
-import Boton from '../components/Boton'
+import BotonReutilizable from '../components/BotonReutilizable'
 import Menu from '../components/Menu'
 
 let dataService = new DataService();
@@ -81,7 +81,7 @@ export default function ConfiguracionScreen({ navigation }) {
           placeholder="Ingrese una uri de una imágen"
           onChangeText={input => setUriImagnFondo(input)}
         />
-        <Boton onPress={handleSubmit} titulo='GUARDAR' style={styles.button} />
+        <BotonReutilizable onPress={handleSubmit} titulo='GUARDAR' style={styles.button} />
       </ImageBackground>
       <ModalMensaje mensaje={mensajeModal} modalVisible={modalVisible} setModalVisible={setModalVisible} success={success} />
       <Menu navigation={navigation} />
